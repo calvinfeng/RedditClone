@@ -1,0 +1,10 @@
+<h1>Reddit Clone</h1>
+<h2>Trending Hubs</h2>
+<body>
+  <% @hubs.each do | hub | %>
+    <%=link_to "#{hub.title}", hub_url(hub.id) %>
+    <br />
+  <% end %>
+</body>
+<br />
+<%= button_to "Add a new hub", new_hub_url, method: :get%>

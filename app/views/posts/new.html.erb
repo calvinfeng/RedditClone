@@ -1,0 +1,51 @@
+<h1>Create a New Post!</h1>
+
+<form
+  action="<%=hub_posts_url(params[:hub_id])%>"
+  method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value ="<%= form_authenticity_token%>">
+
+  <label>Title
+    <br />
+    <input
+      type="text"
+      name="post[title]"
+      value="<%= @post.title %>">
+  </label>
+  <br />
+
+  <label>Select Hubs
+  <br />
+    <% Hub.all.each do |hub| %>
+    <input
+      type="checkbox"
+      name="post[hub_ids][]"
+      value="<%= hub.id %>">
+      <%= hub.title %>
+    </input>
+    <% end %>
+  <br />
+  </label>
+
+  <label>Url
+  <br />
+    <input
+      type="text"
+      name="post[url]"
+      value="<%= @post.url %>">
+  </label>
+  <br />
+
+  <label>Content
+  <br />
+    <textarea
+      name="post[content]"><%= @post.content %></textarea>
+  </label>
+  <br />
+
+  <input type="submit">
+</form>
+<%= button_to "Cancel", hub_url(params[:hub_id]), method: :get%>

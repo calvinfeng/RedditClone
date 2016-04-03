@@ -1,0 +1,35 @@
+<%= link_to "Back to #{Hub.find_by_id(params[:hub_id]).title}", hub_url(params[:hub_id]) %>
+<h1><%= @post.title %></h1>
+<h3>Hub:</h3>
+<div id="hub_list">
+  <ul>
+    <% @post.hubs.each do |hub| %>
+      <li><%=hub.title%></li>
+    <% end %>
+  </ul>
+</div>
+<h3>Author: <%= @post.author.email %></h3>
+<img src="<%= @post.url %>" height="50%" width="50%"></img>
+<p>
+  <%= @post.content %>
+</p>
+<div>
+  <%= button_to "Edit Post",
+    edit_hub_post_url(params[:hub_id], @post.id),
+    method: :get
+   %>
+  <%= button_to "Delete Post",
+    hub_post_url(params[:hub_id], @post.id),
+    method: :delete
+  %>
+</div>
+<!-- Rendering partial views for comments-->
+<%= render "comments/comment_section",
+  post: @post,
+  comments_by_parent_id: @comments_by_parent_id
+%>
+<!-- Rendering partial forms for submmiting comments -->
+<%= render "comments/form",
+  post: @post,
+  parent_comment: nil
+%>

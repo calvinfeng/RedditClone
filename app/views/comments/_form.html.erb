@@ -1,0 +1,29 @@
+<form action="<%= hub_post_comments_url(params[:hub_id], post.id) %>", method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>"
+  >
+  <input
+    type="hidden"
+    name="comment[author_id]"
+    value="<%=current_user.id%>"
+  >
+<% if parent_comment %>
+  <% text = "reply" %>
+  <input
+    type="hidden"
+    name="comment[parent_comment_id]"
+    value="<%=parent_comment.id%>"
+  >
+<% else %>
+  <% text = "New Comment" %>
+<% end %>
+
+  <label for="comment_content"><%=text%></label>
+  <br />
+  <textarea name="comment[content]" id="comment_content"></textarea>
+  <br />
+
+  <input type="submit">
+</form>

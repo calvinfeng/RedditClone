@@ -1,0 +1,32 @@
+<h1>Edit <%= @hub.title %></h1>
+
+<form
+  action="<%=hub_url(@hub.id)%>"
+  method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value ="<%= form_authenticity_token%>">
+  <input
+    type="hidden"
+    name="_method"
+    value ="patch">
+
+    <label>Title
+      <br />
+    <input
+      type="text"
+      name="hub[title]"
+      value="<%= @hub.title %>">
+    </label>
+    <br />
+
+    <label>Description
+      <br />
+    <textarea
+      name="hub[description]"><%=@hub.description%></textarea>
+      </label>
+      <br />
+    <input type="submit" value="Update">
+</form>
+<%= button_to "Cancel", hubs_url, method: :get%>

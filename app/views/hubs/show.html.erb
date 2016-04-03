@@ -1,0 +1,23 @@
+<%= link_to "Back to Mainpage", hubs_url %>
+<h1><%= @hub.title %></h1>
+<%= button_to "Edit Hub", edit_hub_url(@hub.id), method: :get%>
+<h4>
+  <%= @hub.description %>
+</h4>
+<br />
+<body>
+  <ol>
+    <% @hub.sorted_posts.each do |post| %>
+      <li>
+        <%= link_to "#{post.title}", hub_post_url(@hub.id, post.id)%>
+        <br />
+        Vote: <%= post.vote_count %>
+        <%= button_to "Upvote", upvote_hub_post_url(@hub.id, post.id), method: :post%>
+        <%= button_to "Downvote", downvote_hub_post_url(@hub.id, post.id), method: :post%>
+        <br />
+      </li>
+    <% end %>
+  </ol>
+</body>
+<br />
+<%= button_to "Add New Post", new_hub_post_url(@hub.id), method: :get %>

@@ -1,0 +1,55 @@
+<h1>Edit <%= @post.title %></h1>
+
+<form
+  action="<%=hub_post_url(params[:hub_id], params[:id])%>"
+  method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value ="<%= form_authenticity_token%>">
+  <input
+    type="hidden"
+    name="_method"
+    value ="patch">
+
+    <label>Title
+      <br />
+    <input
+      type="text"
+      name="post[title]"
+      value="<%= @post.title %>">
+    </label>
+    <br />
+
+    <label>Select Hubs
+    <br />
+      <% Hub.all.each do |hub| %>
+      <input
+        type="checkbox"
+        name="post[hub_ids][]"
+        value="<%= hub.id %>"
+        <%= "checked" if @post.hub_ids.include?(hub.id)%>>
+        <%= hub.title %>
+      </input>
+      <% end %>
+    <br />
+    </label>
+
+    <label>Url
+      <br />
+    <input
+      type="text"
+      name="post[url]"
+      value="<%= @post.url %>">
+    </label>
+    <br />
+
+    <label>Content
+      <br />
+    <textarea
+      name="post[content]"><%=@post.content%></textarea>
+      </label>
+      <br />
+    <input type="submit" value="Update">
+</form>
+<%= button_to "Cancel", hub_post_url(params[:hub_id], @post.id), method: :get%>

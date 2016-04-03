@@ -1,0 +1,28 @@
+<h1>Create a New Hub!</h1>
+
+<form
+  action="<%=hubs_url%>"
+  method="post">
+  <input
+    type="hidden"
+    name="authenticity_token"
+    value ="<%= form_authenticity_token%>">
+
+    <label>Title
+      <br />
+    <input
+      type="text"
+      name="hub[title]"
+      value="<%= @hub.title %>">
+    </label>
+    <br />
+
+    <label>Description
+      <br />
+    <textarea
+      name="hub[description]"></textarea>
+      </label>
+      <br />
+    <input type="submit">
+</form>
+<%= button_to "Cancel", hubs_url, method: :get%>
